@@ -9,10 +9,9 @@ import static practicum.ConfigTest.BASE_URL;
 
 public class HowItWorks {
 
-    private WebDriver driver;
-
     //кнопка для оформления заказа
-    private static By orderButtonHowItWorks = By.xpath(".//div[starts-with(@class, 'Home_FinishButton__')]/button[starts-with(@class, 'Button_Button__')]");
+    private static final By orderButtonHowItWorks = By.xpath(".//div[starts-with(@class, 'Home_FinishButton__')]/button[starts-with(@class, 'Button_Button__')]");
+    private final WebDriver driver;
 
     public HowItWorks(WebDriver driver) {
         this.driver = driver;
@@ -22,7 +21,7 @@ public class HowItWorks {
     public void openAndScrollToOrderButtonHowItWorks() {
         driver.get(BASE_URL);
         WebElement element = driver.findElement(orderButtonHowItWorks);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView()", element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView()", element);
     }
 
     //кликнуть по кнопке для заказа

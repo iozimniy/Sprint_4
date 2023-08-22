@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import practicum.pages.ImportantQuestions;
+
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
@@ -13,7 +14,7 @@ public class ImportantQuestionTests {
     @Rule
     public DriverRule rule = new DriverRule();
 
-    private int questionNumber;
+    private final int questionNumber;
 
     public ImportantQuestionTests(int questionNumber) {
         this.questionNumber = questionNumber;
@@ -21,7 +22,7 @@ public class ImportantQuestionTests {
 
     @Parameterized.Parameters
     public static Object[] getFAQ() {
-        return new Object[] {
+        return new Object[]{
                 1,
                 3,
                 5
@@ -36,9 +37,8 @@ public class ImportantQuestionTests {
         ask.open();
         ask.waitMainPage();
         ask.scrollToQuestions();
-        assertEquals("Ошибка в вопросе на главной странице!",ask.getExpectedQuestionText(questionNumber),
+        assertEquals("Ошибка в вопросе на главной странице!", TestData.getExpectedQuestionText(questionNumber),
                 ask.getQuestionText(questionNumber));
-
     }
 
     @Test
@@ -51,7 +51,7 @@ public class ImportantQuestionTests {
         faq.scrollToQuestions();
         faq.clickQuestion(questionNumber);
         faq.waitPanel(questionNumber);
-        assertEquals("Ошибка в ответе на главной странице!",faq.getExpectedAnswerText(questionNumber),
+        assertEquals("Ошибка в ответе на главной странице!", TestData.getExpectedAnswerText(questionNumber),
                 faq.getAnswerText(questionNumber));
     }
 }

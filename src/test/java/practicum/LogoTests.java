@@ -26,6 +26,4 @@ public class LogoTests {
         header.clickYandexLogo();
         header.waitMainYandexPage();
     }
-
-
 }

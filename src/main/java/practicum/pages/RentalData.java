@@ -1,6 +1,7 @@
 package practicum.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -9,21 +10,19 @@ import java.time.Duration;
 
 public class RentalData {
 
-    WebDriver driver;
-
     //поле Календарь
-    private static By calendarField = By.xpath(".//input[@placeholder = '* Когда привезти самокат']");
+    private static final By calendarField = By.xpath(".//input[@placeholder = '* Когда привезти самокат']");
     //поле Срок аренды
-    private static By periodField = By.className("Dropdown-arrow");
+    private static final By periodField = By.className("Dropdown-arrow");
     // чекбокс
-    private static By checkboxColourButtons = By.xpath(".//input[@type = 'checkbox']");
+    private static final By checkboxColourButtons = By.xpath(".//input[@type = 'checkbox']");
     //поле для комментарией
-    private static By commentField = By.xpath(".//input[@placeholder = 'Комментарий для курьера']");
+    private static final By commentField = By.xpath(".//input[@placeholder = 'Комментарий для курьера']");
     //кнопка для оформления заказа
-    private static By finishButton = By.xpath(".//div[contains(@class, 'Order_Buttons')]/button[text() = 'Заказать']");
-
+    private static final By finishButton = By.xpath(".//div[contains(@class, 'Order_Buttons')]/button[text() = 'Заказать']");
     //всплывающее окно с номером заказа
-    private static By orderNumdermMessage = By.xpath(".//div[contains(@class, 'Order_NextButton')]/button[text() = 'Посмотреть статус']");
+    private static final By orderNumdermMessage = By.xpath(".//div[contains(@class, 'Order_NextButton')]/button[text() = 'Посмотреть статус']");
+    WebDriver driver;
 
     public RentalData(WebDriver driver) {
         this.driver = driver;
@@ -45,10 +44,12 @@ public class RentalData {
     public void chooseColour(int colour) {
         driver.findElements(checkboxColourButtons).get(colour).click();
     }
+
     //указываем комментарий для курьера
     public void leaveComment(String comment) {
         driver.findElement(commentField).sendKeys(comment);
     }
+
     //кликнуть на кнопку для оформления заказа
     public void clickFinishButton() {
         driver.findElement(finishButton).click();
@@ -64,7 +65,11 @@ public class RentalData {
 
     //дождаться всплывающего окна с номером заказа
     public void waitOrderNumdermMessage() {
-        new WebDriverWait(driver, Duration.ofSeconds(5))
-                .until(ExpectedConditions.visibilityOfElementLocated(orderNumdermMessage));
+        try {
+            new WebDriverWait(driver, Duration.ofSeconds(5))
+                    .until(ExpectedConditions.visibilityOfElementLocated(orderNumdermMessage));
+        } catch (TimeoutException e) {
+            throw new AssertionError("Не открывается страница с номером заказа!");
+        }
     }
 }

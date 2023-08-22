@@ -15,15 +15,15 @@ public class OrderTests {
     @Rule
     public DriverRule rule = new DriverRule();
 
-    private String name;
-    private String surname;
-    private String address;
-    private String Station;
-    private String phone;
-    private String deliveryData;
-    private int rentPeriod;
-    private int checkboxColour;
-    private String comment;
+    private final String name;
+    private final String surname;
+    private final String address;
+    private final String Station;
+    private final String phone;
+    private final String deliveryData;
+    private final int rentPeriod;
+    private final int checkboxColour;
+    private final String comment;
 
     public OrderTests(String name, String surname, String address, String idStation, String phone, String deliveryData, int rentPeriod, int checkboxColour, String comment) {
         this.name = name;
@@ -39,7 +39,7 @@ public class OrderTests {
 
     @Parameterized.Parameters
     public static Object[][] getOrdersData() {
-        return new Object[][] {
+        return new Object[][]{
                 {"Джейн", "Локсли", "Катманду", "Чеховская", "+79996663311", "28.08.2023", 3, 0, "Стучите громче!"},
                 {"Джон", "Доу", "Тимбукту", "Рижская", "89997775522", "27.08.2023", 2, 1, "Позвоните за час"}
         };
@@ -75,6 +75,4 @@ public class OrderTests {
         rentalData.clickFinishButton();
         rentalData.waitOrderNumdermMessage();
     }
-
-
 }

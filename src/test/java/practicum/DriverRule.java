@@ -30,7 +30,8 @@ public class DriverRule extends ExternalResource {
                 .usingDriverExecutable(new File("C:/WebDriver/bin/chromedriver"))
                 .build();
         ChromeOptions options = new ChromeOptions()
-                .setBinary("E:/Prog/chrome for testing/chrome-win64/chrome.exe");
+                .setBinary("E:/Prog/chrome for testing/chrome-win64/chrome.exe")
+                .addArguments("start-maximized");
 
         driver = new ChromeDriver(service, options);
 
@@ -59,5 +60,4 @@ public class DriverRule extends ExternalResource {
     protected void after() {
         driver.quit();
     }
-
 }

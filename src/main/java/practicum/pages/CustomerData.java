@@ -1,9 +1,7 @@
 package practicum.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -13,22 +11,21 @@ import static practicum.ConfigTest.ORDER_URL;
 
 public class CustomerData {
 
-    WebDriver driver;
-
     //Заголовок
-    private static By orderHeader = By.xpath(".//div[starts-with(@class, 'Order_Header')]");
+    private static final By orderHeader = By.xpath(".//div[starts-with(@class, 'Order_Header')]");
     //поле Имя
-    private static By nameField = By.xpath(".//input[@placeholder = '* Имя']");
+    private static final By nameField = By.xpath(".//input[@placeholder = '* Имя']");
     //поле Фамилия
-    private static By surnameField = By.xpath(".//input[@placeholder = '* Фамилия']");
+    private static final By surnameField = By.xpath(".//input[@placeholder = '* Фамилия']");
     //поле Адресс
-    private static By addressField = By.xpath(".//input[@placeholder = '* Адрес: куда привезти заказ']");
+    private static final By addressField = By.xpath(".//input[@placeholder = '* Адрес: куда привезти заказ']");
     //поле Станция
-    private static By stationField = By.xpath(".//input[@placeholder = '* Станция метро']");
+    private static final By stationField = By.xpath(".//input[@placeholder = '* Станция метро']");
     //поле Телефон
-    private static By phoneField = By.xpath(".//input[@placeholder = '* Телефон: на него позвонит курьер']");
+    private static final By phoneField = By.xpath(".//input[@placeholder = '* Телефон: на него позвонит курьер']");
     //кнопка для перехода на следующий экран
-    private static By nextButtom = By.xpath(".//div[starts-with(@class, 'Order_NextButton')]/button[starts-with(@class, 'Button_Button')]");
+    private static final By nextButton = By.xpath(".//div[starts-with(@class, 'Order_NextButton')]/button[starts-with(@class, 'Button_Button')]");
+    WebDriver driver;
 
     public CustomerData(WebDriver driver) {
         this.driver = driver;
@@ -76,7 +73,7 @@ public class CustomerData {
 
     //кликнем по кнопке для перехода
     public RentalData clickOnNextButton() {
-        driver.findElement(nextButtom).click();
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(nextButton)).click();
         return new RentalData(driver);
     }
 
