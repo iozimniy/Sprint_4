@@ -73,6 +73,6 @@ public class OrderTests {
         RentalData rentalData = data.clickOnNextButton();
         rentalData.fillInRentData(deliveryData, rentPeriod, checkboxColour, comment);
         rentalData.clickFinishButton();
-        rentalData.waitOrderNumdermMessage();
+        rentalData.waitOrderNumderMessage();
     }
 }

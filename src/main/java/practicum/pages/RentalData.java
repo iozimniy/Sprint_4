@@ -64,7 +64,7 @@ public class RentalData {
     }
 
     //дождаться всплывающего окна с номером заказа
-    public void waitOrderNumdermMessage() {
+    public void waitOrderNumderMessage() {
         try {
             new WebDriverWait(driver, Duration.ofSeconds(5))
                     .until(ExpectedConditions.visibilityOfElementLocated(orderNumdermMessage));
